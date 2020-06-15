@@ -1,6 +1,6 @@
 import React from 'react'
-import CounterStore from '../../store/CounterStore.js'
 import * as Actions from '../../Actions.js'
+import store from '../../Store.js'
 
 export default class Counter extends React.Component{
     constructor(props) {
@@ -8,41 +8,42 @@ export default class Counter extends React.Component{
         this.onChange = this.onChange.bind(this)
         this.onClickIncrementButton = this.onClickIncrementButton.bind(this);
         this.onClickDecrementButton = this.onClickDecrementButton.bind(this);
-        this.state = {
-            count: CounterStore.getCounterValues()[props.caption]
-        }
+        this.state = this.getOwnState();
+    }
+
+    getOwnState() {
+        return {
+            value: store.getState()[this.props.caption]
+        };
     }
 
     componentDidMount() {
-        CounterStore.addChangeListener(this.onChange);
+        store.subscribe(this.onChange)
     }
 
     componentWillUnmount() {
-        CounterStore.removeChangeListener(this.onChange)
+        store.unsubscribe(this.onChange)
     }
 
     onChange() {
-        const newCount = CounterStore.getCounterValues()[this.props.caption]
-        this.setState({
-            count: newCount
-        })
+        this.setState(this.getOwnState())
     }
 
     onClickIncrementButton() {
-        Actions.increment(this.props.caption)
+        store.dispatch(Actions.increment(this.props.caption))
     }
     onClickDecrementButton() {
-        Actions.decrement(this.props.caption)
+        store.dispatch(Actions.decrement(this.props.caption))
     }
 
     render() {
         const { caption } = this.props;
-        let { count } = this.state
+        let { value } = this.state
         return (
             <div>
                 <button onClick={this.onClickIncrementButton}>+</button>
                 <button onClick={this.onClickDecrementButton}>-</button>
-                <span>{caption} count: {count}</span>
+                <span>{caption} count: {value}</span>
             </div>
         )
     }
