@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, createContext, useContext } from 'react'
+import { destroyFns } from 'antd/lib/modal/Modal'
+const Context = createContext(null)
+const fns = new Set()
 
 const PlusFirst = React.memo(({plus}) => {
-    return <button onClick={plus}>Plus</button>
+    const api = useContext(Context);
+    return <button onClick={api.plus}>Plus</button>
 })
 const PlusSecond = React.memo(({plus2}) => {
-    return <button onClick={plus2}>Plus2</button>
+    const api = useContext(Context);
+    return <button onClick={api.plus2}>Plus2</button>
 })
 
 const Header = React.memo(({plus, plus2}) => {
-    console.log('haha', plus);
     return (
         <div className='list-header'>
             <span> options: </span>
@@ -26,12 +30,18 @@ const Demo = () => {
     const plus = () => setCountFirst(countFrist + 1);
     const plus2 = () => setCountSecond(countSecond + 1);
 
+    fns.add(plus)
+    fns.add(plus2)
+
     return (
         <div>
-            <span>------------</span>
-            <Header plus = {plus} plus2 = {plus2} ></Header>
-            <div>count1: {countFrist}</div>
-            <div>count2: {countSecond}</div>
+            <Context.Provider value={{plus, plus2}}>
+                <span>------------</span>
+                <Header />
+                <div>function: {fns.size -2 }</div>
+                <div>count1: {countFrist}</div>
+                <div>count2: {countSecond}</div>
+            </Context.Provider>
         </div>
     )
 }
