@@ -1,6 +1,8 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BasicPlugin = require('./plugins/baiscPlugin')
+const changeOutputPlugin = require('./plugins/changeOutput')
 module.exports = {
   context: __dirname,
   entry:  [
@@ -56,6 +58,12 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    // new BasicPlugin(),
+    new changeOutputPlugin(),
+    // webapck启动后，在读取配置的过程中会先执行new BasicPlugin()，初始化一个BasicPlugin并获取实例。
+    // 在初始化compiler对象后，调用basicPlugin.apply(compiler)为插件实例传入compiler对象。
+    // 插件实例在获取compiler对象后，就可以通过compiler.plugin(事件名称，回调函数),监听到webpack广播的时间，
+    // 就可以通过compiler对象去操作webpack
   ],
   resolveLoader: {
     modules:['node_modules', './loaders']
