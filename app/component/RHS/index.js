@@ -8,7 +8,7 @@ function RHS() {
     });
 
     useEffect(() => {
-        console.log(name)
+        setName('haha')
     });
 
     return (

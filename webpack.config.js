@@ -24,6 +24,8 @@ module.exports = {
         test: /\.jsx?$/,
         use: [
           'babel-loader',
+          'comment-require-loader',
+          'auto-require-less'
         ],
         exclude: /node_modules/
       },
@@ -36,11 +38,27 @@ module.exports = {
         use:['style-loader','css-loader','less-loader'],
         exclude: /node_modules/
       },
+      // {
+      //   test: /\.scss/,
+      //   use: [
+      //     'style-loader',
+      //     {
+      //       loader: 'css-loader',
+      //       options: {
+      //         minimize: true
+      //       }
+      //     },
+      //     'sass-loader'
+      //   ]
+      // }
     ],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
   ],
+  resolveLoader: {
+    modules:['node_modules', './loaders']
+  },
   devtool: "cheap-eval-source-map",
 };
