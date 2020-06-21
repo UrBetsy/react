@@ -5,4 +5,5 @@ module.exports = function (source) {
     // exports.raw == true时候，loader也可以返回buffer类型的结果
     return source;
 }
+// 没有这句，loader只能拿到字符串
 module.exports.raw = true;
