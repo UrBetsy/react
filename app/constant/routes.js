@@ -6,5 +6,9 @@ export default = [
     {
         root: '/About',
         name: '关于',
+    },
+    {
+        root: '/decorator',
+        name: '装饰器实现防抖节流',
     }
 ]
