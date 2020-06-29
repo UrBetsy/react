@@ -41,6 +41,14 @@ module.exports = {
         use:['style-loader','css-loader','less-loader'],
         exclude: /node_modules/
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader: 'file-loader',
+        query:{
+            name:'img/[name]-[hash:5].[ext]',  //这里img是存放打包后图片文件夹，结合publicPath来看就是/webBlog/build/img文件夹中，后边接的是打包后图片的命名方式。
+            outputPath: 'asset/images/'
+        }
+      },
       // {
       //   test: /\.scss/,
       //   use: [
