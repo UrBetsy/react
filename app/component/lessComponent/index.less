@@ -208,3 +208,29 @@
     transform: scale(2) rotate(15deg);
 */
 
+.div20color {
+    background-color: blue;
+}
+// 下面两种写法都可以
+// .div-20 {
+//     &:extend(.div20color);
+// }
+.div-20:extend(.div20color) {
+
+}
+
+.div21one {
+    background-color: yellow;
+}
+.div21one {
+    border: solid 1px black;
+}
+.div-21:extend(.div21one all) {
+    
+}
+
+.div-22 {
+    height: ~'calc(300px-30px)';
+    width: ~'calc(300px-30px)';
+    &:extend(.div21one all);
+}

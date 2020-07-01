@@ -64,6 +64,14 @@ export default class ReactRouter extends React.Component{
                 </div>
                 <h3>属性拼接</h3>
                 <div className='div-19'>我是19</div>
+                <h1>继承</h1>
+                <h3>extend</h3>
+                <div className='div-20'>我是20</div>
+                <h3>all</h3>
+                <div className='div-21'>我是21</div>
+                <h1>导入</h1>
+                <h1>函数</h1>
+                <div className='div-22'>我是22</div>
             </div>
         )
     }
