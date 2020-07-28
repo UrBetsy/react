@@ -1,4 +1,11 @@
-.home-container {
+.className {
+    background-color: yellow;
+}
+.home_container {
     margin: 200px;
-    background-color: red;
+    composes: aboutClass from '../About/index.less';
+}
+:global(.home_container) {
+    margin: 200px;
+    background-color: green;
 }

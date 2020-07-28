@@ -28,17 +28,17 @@ module.exports = {
         use: [
           'babel-loader',
           'comment-require-loader',
-          'auto-require-less'
+          // 'auto-require-less'
         ],
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        use: ['style-loader','css-loader'],
+        use: ['style-loader','css-loader?modules'],
         exclude: /node_modules/
       },
       { test:/\.less$/,
-        use:['style-loader','css-loader','less-loader'],
+        use:['style-loader','css-loader?modules','less-loader'],
         exclude: /node_modules/
       },
       // {
